@@ -19,9 +19,20 @@ import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 const baseHref = document.querySelector('base').getAttribute('href').replace(/\/$/, '');
 
 export interface IAppProps extends StateProps, DispatchProps {}
+
+// Cambio el color de material ui para utilizar el color de merlion.
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#2a6a9e'
+    }
+  }
+});
 
 export const App = (props: IAppProps) => {
   useEffect(() => {
@@ -32,6 +43,7 @@ export const App = (props: IAppProps) => {
   const paddingTop = '60px';
   return (
     <Router basename={baseHref}>
+      <MuiThemeProvider theme={theme}>
       <div className="app-container" style={{ paddingTop }}>
         <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
         <ErrorBoundary>
@@ -54,6 +66,7 @@ export const App = (props: IAppProps) => {
           <Footer />
         </div>
       </div>
+      </MuiThemeProvider>
     </Router>
   );
 };
