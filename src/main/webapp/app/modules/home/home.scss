@@ -8,3 +8,21 @@ Main page styles
   background: url('../../../content/images/jhipster_family_member_2.svg') no-repeat center top;
   background-size: contain;
 }
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+
+  .lineChart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .barChart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+}

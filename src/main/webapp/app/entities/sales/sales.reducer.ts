@@ -13,6 +13,10 @@ export const ACTION_TYPES = {
   UPDATE_SALES: 'sales/UPDATE_SALES',
   DELETE_SALES: 'sales/DELETE_SALES',
   RESET: 'sales/RESET',
+  FETCH_VENTA_DELIVERED: 'sales/FETCH_VENTA_DELIVERED',
+  FETCH_VENTA_POR_DIA: 'sales/FETCH_VENTA_POR_DIA',
+  FETCH_TOP_VENTA: 'sales/FETCH_TOP_VENTA',
+  FETCH_TOP_INGRESOS: 'sales/FETCH_TOP_INGRESOS',
 };
 
 const initialState = {
@@ -22,6 +26,10 @@ const initialState = {
   entity: defaultValue,
   updating: false,
   updateSuccess: false,
+  ventaDelivered: [],
+  ventaPorDia: [],
+  ventaTopVendidos: [],
+  ventaTopIngresos: [],
 };
 
 export type SalesState = Readonly<typeof initialState>;
@@ -90,6 +98,26 @@ export default (state: SalesState = initialState, action): SalesState => {
       return {
         ...initialState,
       };
+    case SUCCESS(ACTION_TYPES.FETCH_VENTA_DELIVERED):
+      return {
+        ...state,
+        ventaDelivered: action.payload.data,
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_VENTA_POR_DIA):
+      return {
+        ...state,
+        ventaPorDia: action.payload.data,
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_TOP_VENTA):
+      return {
+        ...state,
+        ventaTopVendidos: action.payload.data,
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_TOP_INGRESOS):
+      return {
+        ...state,
+        ventaTopIngresos: action.payload.data,
+      };
     default:
       return state;
   }
@@ -141,4 +169,24 @@ export const deleteEntity: ICrudDeleteAction<ISales> = id => async dispatch => {
 
 export const reset = () => ({
   type: ACTION_TYPES.RESET,
+});
+
+export const getVentaDelivered: any = () => ({
+  type: ACTION_TYPES.FETCH_VENTA_DELIVERED,
+  payload: axios.get<any>('api/ventasDelivered'),
+});
+
+export const getVentaPorDia: any = () => ({
+  type: ACTION_TYPES.FETCH_VENTA_POR_DIA,
+  payload: axios.get<any>('api/ventasPorDia'),
+});
+
+export const getVentaTopVendidos: any = () => ({
+  type: ACTION_TYPES.FETCH_TOP_VENTA,
+  payload: axios.get<any>('api/productosMasVendidos'),
+});
+
+export const getVentaTopIngresos: any = () => ({
+  type: ACTION_TYPES.FETCH_TOP_INGRESOS,
+  payload: axios.get<any>('api/productosMasIngresos'),
 });

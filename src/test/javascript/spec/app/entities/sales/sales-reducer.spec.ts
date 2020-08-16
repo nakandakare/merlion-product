@@ -33,6 +33,10 @@ describe('Entities reducer tests', () => {
     entity: defaultValue,
     updating: false,
     updateSuccess: false,
+    ventaDelivered: [],
+    ventaPorDia: [],
+    ventaTopVendidos: [],
+    ventaTopIngresos: [],
   };
 
   function testInitialState(state) {

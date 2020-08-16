@@ -115,4 +115,24 @@ public class SalesResource {
         salesRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/ventasDelivered")
+    public List<?> getVentasDelivered() {
+        return salesRepository.ventasDeliveredPorDia();
+    }
+
+    @GetMapping("/ventasPorDia")
+    public List<?> ventasPorDia() {
+        return salesRepository.ventasPorDia();
+    }
+
+    @GetMapping("/productosMasVendidos")
+    public List<?> productosMasVendidos() {
+        return salesRepository.productosMasVendidos();
+    }
+
+    @GetMapping("/productosMasIngresos")
+    public List<?> productosMasIngresos() {
+        return salesRepository.productosMasIngresos();
+    }
 }
